@@ -1,19 +1,28 @@
 params={}
+Globals=[]
 dataSource={}
 algo={}
 
-dataSource['ip']='192.168.1.100'
-dataSource['port']=27017
-dataSource['database']='Tushare'
-
-dataSource['symbol']='000001'
-dataSource['dateStart']='2013-02-19'
+dataSource['dataProvider']='tushare'
+dataSource['storageFormat']='mongodb'
+dataSource['symbol']='600028'
+dataSource['dateStart']='2015-03-19'
 dataSource['dateEnd']='2015-12-31'
-dataSource['frequency']='D'
+dataSource['dataPeriod']='D'
 
 algo['instant_fill']=True
 algo['capital_base']=1000
 
-
 params['dataSource'] = dataSource
-params['algo'] = algo
+params['algo'] = algo  
+
+from TradingCalendar import shTradingCalendar
+tradingcalendar = shTradingCalendar    
+from zipline.finance.trading import TradingEnvironment
+from loaders.yahooLoader import load_market_data
+algo['env']=TradingEnvironment(load=load_market_data,
+                               #bm_symbol='000001',
+                               exchange_tz="Asia/Shanghai",
+                               max_date=None,
+                               env_trading_calendar = tradingcalendar,
+                               asset_db_path=':memory:')   

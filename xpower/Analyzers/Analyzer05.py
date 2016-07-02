@@ -373,7 +373,7 @@ class Analyzer05():
         # 2) creates widgets 
         #  2.1)candle
         import os,sys        
-        xpower = os.path.abspath(os.path.join(os.path.dirname(__file__),os.pardir,os.pardir,os.pardir,'histdataUI'))
+        xpower = os.path.abspath(os.path.join(os.path.dirname(__file__),os.pardir,os.pardir,os.pardir,'midProjects','histdataUI'))
         sys.path.append(xpower)
     
         from Widgets.pgCandleWidgetCross import pgCandleWidgetCross

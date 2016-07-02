@@ -38,7 +38,7 @@ if __name__ == '__main__':
 import matplotlib.pyplot as plt
 from Algorithms.DualEma_talib import DualEmaTalib
 import os,sys        
-xpower = os.path.abspath(os.path.join(os.path.dirname(__file__),os.pardir,os.pardir,os.pardir,'histdata'))
+xpower = os.path.abspath(os.path.join(os.path.dirname(__file__),os.pardir,os.pardir,os.pardir,'midProjects','histdata'))
 sys.path.append(xpower)
 
 import dataCenter as dataCenter    

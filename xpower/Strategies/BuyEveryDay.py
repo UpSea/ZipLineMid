@@ -13,14 +13,14 @@ if __name__ == '__main__':
     algo={}
     #-------------------------------------------------------------------------------------------
     # 0)自定义数据获取参数
-    dataSource['ip']='192.168.0.212'
-    dataSource['port']=27017
-    dataSource['database']='Tushare'
+
+    dataSource['dataProvider']='tushare'
+    dataSource['storageFormat']='mongodb'
     
     dataSource['symbol']='600028'
     dataSource['dateStart']='2015-12-21'
     dataSource['dateEnd']='2015-12-24'
-    dataSource['frequency']='D'
+    dataSource['dataPeriod']='D'
     
     # 1)自定义zipline运行参数
     # 1.1)简单类型参数
@@ -79,11 +79,10 @@ import matplotlib.pyplot as plt
 from Algorithms.BuyEveryDay import BuyEveryDay
 
 import os,sys        
-xpower = os.path.abspath(os.path.join(os.path.dirname(__file__),os.pardir,os.pardir,os.pardir,'histdata'))
+xpower = os.path.abspath(os.path.join(os.path.dirname(__file__),os.pardir,os.pardir,os.pardir,'midProjects','histdata'))
 sys.path.append(xpower)
 
-import feedsForCandle as feedsForCandle
-import feedsForZipline as feedsForZipline
+import dataCenter as dataCenter    
 
 from Analyzers.Analyzer01 import Analyzer01
 from Analyzers.Analyzer02 import Analyzer02
@@ -94,10 +93,9 @@ from Analyzers.PriceScatter import PriceScatter
 dataSource = params['dataSource']
 algo = params['algo']
  
-dataForZipline = feedsForZipline.GetFeedsFromMongodb(dataSource)
-dataForCandle = feedsForCandle.GetCandlesFromMongodb(dataSource)
-
-
+dataCenter = dataCenter.dataCenter()           
+dataForZipline = dataCenter.getFeedsForZipline(dataSource)
+dataForCandle = dataCenter.retriveCandleData(params = dataSource)
 
 def dumpDict(dictStr):
     """"""
